@@ -1,11 +1,17 @@
 import React from "react";
 
-const Hello = (props) => {
+const Hello = ({ name, age }) => {
+  const bornYear = () => new Date().getFullYear() - age
+
+  // -- Vaihtoehtoinen tapa määrittää funktio --
+  // const bornYear = () => {
+  //   return new Date().getFullYear() - age
+  // }
+
   return (
     <div>
-      <p>
-        Hello {props.name}, you are {props.age} years old
-      </p>
+      <p>Hello {name}, you are {age} years old</p>
+      <p>So you were probably born {bornYear()}</p>
     </div>
   );
 };
@@ -13,8 +19,7 @@ const Hello = (props) => {
 const Footer = () => {
   return (
     <div>
-      greeting app created by
-      <a href="https://github.com/handew">Handew</a>
+      <p>greeting app created by <a href="https://github.com/handew">Handew</a></p> 
     </div>
   );
 };
