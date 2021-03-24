@@ -1,45 +1,63 @@
 import React from 'react'
 
+const App = () => {
+  const course = {
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
+  }
+
+  return (
+    <div>
+      <Header kurssi={course.name}/>
+      <Content osat={course.parts} />
+      <Total osat={course.parts} />
+    </div>
+  )
+}
+
 const Header = (props) => {
   return (
-    <>
-      <h1>{props.course}</h1>
-    </>
+    <div>
+      <h1>{props.kurssi}</h1>
+    </div>
   )
 }
 
 const Content = (props) => {
   return (
-    <>
-      <p>{props.kurssi1} {props.harjoitus1}</p>
-      <p>{props.kurssi2} {props.harjoitus2}</p>
-      <p>{props.kurssi3} {props.harjoitus3}</p>
-    </>
+    <div>
+      <Part osa={props.osat[0].name} harjoitus={props.osat[0].exercises} />
+      <Part osa={props.osat[1].name} harjoitus={props.osat[1].exercises}/>
+      <Part osa={props.osat[2].name} harjoitus={props.osat[2].exercises}/>
+    </div>
+  )
+}
+
+const Part = (props) => {
+  return (
+    <div>
+      <p>{props.osa} {props.harjoitus}</p>
+    </div>
   )
 }
 
 const Total = (props) => {
   return (
-    <>
-      <p>Number of exercises {props.harjoitus1 + props.harjoitus2 + props.harjoitus3} </p>
-    </>
-  )
-}
-
-const App = () => {
-  const course = 'Half Stack application development'
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
-
-  return (
     <div>
-      <Header course={course} />
-      <Content kurssi1={part1} kurssi2={part2} kurssi3={part3} harjoitus1={exercises1} harjoitus2={exercises2} harjoitus3={exercises3}/>
-      <Total harjoitus1={exercises1} harjoitus2={exercises2} harjoitus3={exercises3} />
+      <p>Number of exercises {props.osat[0].exercises + props.osat[1].exercises + props.osat[2].exercises}</p>
     </div>
   )
 }
