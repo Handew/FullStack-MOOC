@@ -22,6 +22,14 @@ const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</
 
 const Statistics = ({ txtGood, valueGood, txtNeutral, valueNeutral, txtBad, valueBad }) => {
 
+  if (valueGood === 0 && valueNeutral === 0 && valueBad === 0) {
+    return (
+      <div>
+        <p>No feedback given</p>
+      </div>
+    )
+  }
+
   return (
     <div>
       <h1>Statistics</h1>
@@ -33,6 +41,8 @@ const Statistics = ({ txtGood, valueGood, txtNeutral, valueNeutral, txtBad, valu
       <div><Positive valueGood={valueGood} /></div>
     </div>
   )
+
+
 }
 
 
