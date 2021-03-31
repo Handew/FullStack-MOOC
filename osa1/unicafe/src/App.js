@@ -21,10 +21,10 @@ const Positive = ({ valueGood }) => {
 const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
 
 const StatisticLine = ({ text, value }) => {
-  return(
-    <div>
-      <div>{text} {value}</div>
-    </div>
+  return (
+    <tr>
+      <td>{text}</td><td>{value}</td>
+    </tr>
   )
 }
 
@@ -38,15 +38,19 @@ const Statistics = ({ valueGood, valueNeutral, valueBad }) => {
     )
   }
   return (
-    <div>
+    <>
       <h1>Statistics</h1>
-      <StatisticLine text="good" value={valueGood} />
-      <StatisticLine text="neutral" value={valueNeutral} />
-      <StatisticLine text="bad" value={valueBad} />
-      <StatisticLine text="all" value={<All valueGood={valueGood} valueNeutral={valueNeutral} valueBad={valueBad} />} />
-      <StatisticLine text="average" value={<Average valueGood={valueGood} valueBad={valueBad} />} />
-      <StatisticLine text="positive" value={<Positive valueGood={valueGood} />} />
-    </div>
+      <table>
+        <tbody>
+          <StatisticLine text="good" value={valueGood} />
+          <StatisticLine text="neutral" value={valueNeutral} />
+          <StatisticLine text="bad" value={valueBad} />
+          <StatisticLine text="all" value={<All valueGood={valueGood} valueNeutral={valueNeutral} valueBad={valueBad} />} />
+          <StatisticLine text="average" value={<Average valueGood={valueGood} valueBad={valueBad} />} />
+          <StatisticLine text="positive" value={<Positive valueGood={valueGood} />} />
+        </tbody>
+      </table>
+    </>
   )
 }
 
