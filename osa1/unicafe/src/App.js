@@ -5,16 +5,20 @@ const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</
 
 const Display = ({ text,value }) => <div>{text} {value}</div>
 
-// const Average = ({ good, bad, all }) =>{
-//   return (good - bad) / all
-// }
-
+var summa
 const All = ({ good, neutral, bad }) => {
-  return (good + neutral + bad)
+  summa = (good + neutral + bad)
+  return <div>{'all ' + summa}</div>
 }
 
-const Average = ({ good, bad, all }) =>{
-  return (good - bad) / all
+const Average = ({ good, bad }) =>{
+  let ka = (good - bad) / summa
+  return <div>{'average ' + ka}</div>
+}
+
+const Positive = ({ good }) => {
+  let positive = (good / summa) * 100
+  return <div>{'positive ' + positive + ' %'}</div>
 }
 
 const App = () => {
@@ -22,30 +26,20 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
-
-  //  const [all, setAll] = useState(0)
-  // const [average, setAverage] = useState(0)
-
  
 
  
 
   const handleGoodClick = () => {
-    // setAll(all + 1)
     setGood(good + 1)
-    // setAverage(average + 1)
   }
 
   const handleNeutralClick = () => {
-    // setAll(all + 1)
     setNeutral(neutral + 1)
-    // setAverage(average + 0)
   }
 
   const handleBadClick = () => {
-    // setAll(all + 1)
     setBad(bad + 1)
-    // setAverage(average - 1)
   }
 
   return (
@@ -59,9 +53,9 @@ const App = () => {
       <Display text='good' value={good} />
       <Display text='neutral' value={neutral} />
       <Display text='bad' value={bad} />
-      {/* <All good={good} neutral={neutral} bad={bad} /> */}
-      {/* <Average good={good} bad={bad} /> */}
-      {/* <Display text='positive' value={good} /> */}
+      <All good={good} neutral={neutral} bad={bad} />
+      <Average good={good} bad={bad} />
+      <Positive good={good} />
     </div>
   )
 }
