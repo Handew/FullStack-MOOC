@@ -1,5 +1,24 @@
 import React, { useState } from 'react'
 
+const Suosituin = ({ points, anecdotes }) => {
+  let pisteet = 0
+  let suosituin = 0
+  for (let i = 0; i < points.length; i++) {
+    if(points[i] > pisteet){
+      pisteet = points[i];
+      suosituin = i
+    }
+  }
+  return (
+    <div>
+      <h1>Anecdote with most votes</h1>
+      {anecdotes[suosituin]}
+      <div>has {pisteet} votes</div>
+    </div>
+  )
+}
+
+const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
 
 
 const App = () => {
@@ -21,19 +40,19 @@ const App = () => {
 
   const handleVoteClick = () => {
     const copy = [...points]
-    console.log("CLICK: kenelle annetaan piste", selected)
     copy[selected] += 1
     setPoints(copy)
   } 
 
-  console.log("pistetaulukku:", points)
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <div>{anecdotes[selected]}</div>
       <div>has {points[selected]} votes</div>
-      <button onClick={handleVoteClick}>vote</button>
-      <button onClick={handleNextClick}>next anecdotes</button>
 
+      <Button handleClick={handleVoteClick} text="vote" />
+      <Button handleClick={handleNextClick} text="next anecdotes" />
+      <Suosituin points={points} anecdotes={anecdotes} />
     </div>
   )
 }
