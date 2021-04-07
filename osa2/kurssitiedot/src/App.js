@@ -44,38 +44,40 @@ const Course = ({ course }) => {
   )
 }
 
-const Header = (props) => {
+const Header = ({ kurssi }) => {
   return (
     <div>
-      <h1>{props.kurssi}</h1>
+      <h1>{kurssi}</h1>
     </div>
   )
 }
 
-const Content = (props) => {
+const Content = ({ osat }) => {
+  const result = osat.map(osa => 
+    <li key={osa.id}>
+      {osa.name} {osa.exercises}
+    </li>)
   return (
     <div>
-      <Part osa={props.osat[0].name} harjoitus={props.osat[0].exercises} />
-      <Part osa={props.osat[1].name} harjoitus={props.osat[1].exercises} />
-      <Part osa={props.osat[2].name} harjoitus={props.osat[2].exercises} />
+      <Part osa={result} />
     </div>
   )
 }
 
-const Part = (props) => {
+const Part = ({ osa, harjoitus }) => {
   return (
     <div>
-      <p>{props.osa} {props.harjoitus}</p>
+      <p>{osa} {harjoitus}</p>
     </div>
   )
 }
 
-const Total = (props) => {
-  return (
-    <div>
-      <p>Number of exercises {props.osat[0].exercises + props.osat[1].exercises + props.osat[2].exercises}</p>
-    </div>
-  )
-}
+// const Total = (props) => {
+//   return (
+//     <div>
+//       <p>Number of exercises {props.osat[0].exercises + props.osat[1].exercises + props.osat[2].exercises}</p>
+//     </div>
+//   )
+// }
 
 export default App
