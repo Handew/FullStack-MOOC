@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
 const App = () => {
-  const [ persons, setPersons] = useState([
+  const [persons, setPersons] = useState([
     { name: 'Arto Hellas' }
-  ]) 
-  const [ newName, setNewName ] = useState('')
+  ])
+  const [newName, setNewName] = useState('')
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -12,22 +12,22 @@ const App = () => {
       name: newName,
     }
 
-    // if (!(persons.find({newName}))){
+    if (!(persons.find(p => p.name === newName))){
       setPersons(persons.concat(personObject))
       setNewName('')
-    // }
-    // window.alert("käyttäjä on ennestään jo")
-
+    }else{
+      window.alert(`${newName} is already added to phonebook`)
+    }
   }
 
   const handleNameChange = (event) => {
-      setNewName(event.target.value)   
+    setNewName(event.target.value)
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
- 
+
       <form onSubmit={addPerson}>
         <div>
           name: <input value={newName} onChange={handleNameChange} />
