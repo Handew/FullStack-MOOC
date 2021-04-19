@@ -45,7 +45,7 @@ const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456' },
     { name: 'Hannu Ilvonen', number: '045-654321' },
-    { name: 'Ida Torvinen', number: '0700 123 123' },
+    { name: 'Ada Lovelace', number: '050 123 123' },
     { name: 'Pertti Järvinen', number: '050 159 753' }
   ])
   const [newName, setNewName] = useState('')
