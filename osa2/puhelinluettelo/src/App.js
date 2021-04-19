@@ -1,5 +1,46 @@
 import React, { useState } from 'react'
 
+const Filter = ({ search, handleSearchInputChange }) => {
+  return (
+    <div>
+      filter shown with <input value={search} onChange={handleSearchInputChange} />
+    </div>
+  )
+}
+
+const PersonForm = ({ newName, newNumber, handleNameChange, handleNumberChange, addPerson }) => {
+  return (
+    <div>
+      <form onSubmit={addPerson}>
+        <div>name: <input value={newName} onChange={handleNameChange} /></div>
+        <div>number: <input value={newNumber} onChange={handleNumberChange} /></div>
+        <div>
+          <button type="submit">add</button>
+        </div>
+      </form>
+    </div>
+  )
+}
+
+const Persons = ({ persons, search }) => {
+  return (
+    <div>
+      {persons.map((persons) => {
+        let lowerCaseName = persons.name.toLowerCase()
+        if (lowerCaseName.indexOf(search) > -1) {
+          return (
+            <p key={persons.name}> {persons.name} {persons.number} </p>
+          )
+        }
+        return (
+          null
+        )
+      })
+      }
+    </div>
+  )
+}
+
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456' },
@@ -17,7 +58,7 @@ const App = () => {
       name: newName,
       number: newNumber,
     }
-
+    //Tarkistus onko nimi jo olemassa => jos on niin ilmoitus tästä eikä tätä lisätä uudelleen
     if (!(persons.find(p => p.name === newName))) {
       setPersons(persons.concat(personObject))
       setNewName('')
@@ -42,39 +83,13 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-
-      filter shown with <input value={search} onChange={handleSearchInputChange} />
+      <Filter search={search} handleSearchInputChange={handleSearchInputChange} />
 
       <h2>add a new</h2>
-      <form onSubmit={addPerson}>
-        <div>name: <input value={newName} onChange={handleNameChange} /></div>
-        <div>number: <input value={newNumber} onChange={handleNumberChange} /></div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <PersonForm addPerson={addPerson} newName={newName} newNumber={newNumber} handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} />
 
       <h2>Numbers</h2>
-      <div>
-        {/* {persons.map(person =>
-          <p key={person.name}> {person.name} {person.number}
-          </p>)} */}
-
-
-        {persons.map((persons) => {
-          let lowerCaseName = persons.name.toLowerCase()
-          if (lowerCaseName.indexOf(search) > -1) {
-            return (
-              <p key={persons.name}> {persons.name} {persons.number} </p>
-            )
-          }
-          return (
-            null
-          )
-        })
-        }
-
-      </div>
+      <Persons persons={persons} search={search} />
     </div>
   )
 
