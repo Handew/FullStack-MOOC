@@ -1,7 +1,9 @@
-import ReactDOM from 'react-dom';
-import App from './App';
+import ReactDOM from 'react-dom'
+import App from './App'
+import Head from './Head'
 
 ReactDOM.render(
+    <Head />,
     <App />,
   document.getElementById('root')
-);
+)
