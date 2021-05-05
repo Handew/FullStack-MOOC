@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import personService from './services/persons'
 
 const Filter = ({ search, handleSearchInputChange }) => {
   return (
@@ -23,7 +23,7 @@ const PersonForm = ({ newName, newNumber, handleNameChange, handleNumberChange, 
   )
 }
 
-const Persons = ({ persons, search }) => {
+const Persons = ({ persons, search, handleDeleteClick }) => {
   return (
     <div>
       {persons.map((persons) => {
@@ -49,10 +49,10 @@ const App = () => {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
+    personService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
       })
   }, [])
 
@@ -70,6 +70,14 @@ const App = () => {
     } else {
       window.alert(`${newName} is already added to phonebook`)
     }
+
+    personService
+      .create(personObject)
+      .then(returnedPerson => {
+        setPersons(persons.concat(returnedPerson))
+        setNewName('')
+        setNewNumber('')
+      })
   }
 
   const handleSearchInputChange = (event) => {
@@ -84,6 +92,24 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
+  // const handleDeleteClick = (id) => {
+  //   const person = persons.find((per) => per.id === id)
+  //   console.log("tää vittuilee",person)
+    
+  //   const confirm = window.confirm(
+  //     `Delete ${person.name}?`
+  //   )
+
+  //   if (confirm) {
+  //     personService
+  //       .remove(id)
+  //       .then(returnedPerson => {
+  //         setPersons(persons.concat(returnedPerson))
+  //       })
+  //   }
+
+  // }
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -93,7 +119,7 @@ const App = () => {
       <PersonForm addPerson={addPerson} newName={newName} newNumber={newNumber} handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} />
 
       <h2>Numbers</h2>
-      <Persons persons={persons} search={search} />
+      <Persons persons={persons} search={search}  />
     </div>
   )
 
