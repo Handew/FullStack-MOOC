@@ -30,7 +30,7 @@ const Persons = ({ persons, search, handleDeleteClick }) => {
         let lowerCaseName = persons.name.toLowerCase()
         if (lowerCaseName.indexOf(search) > -1) {
           return (
-            <p key={persons.name}> {persons.name} {persons.number} </p>
+            <p key={persons.name}> {persons.name} {persons.number} <button onClick={handleDeleteClick}>delete</button></p>
           )
         }
         return (
@@ -92,23 +92,23 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
-  // const handleDeleteClick = (id) => {
-  //   const person = persons.find((per) => per.id === id)
-  //   console.log("tää vittuilee",person)
+  const handleDeleteClick = (id) => {
+    const person = persons.find((per) => per.id === id)
+    console.log("tää vittuilee",person)
     
-  //   const confirm = window.confirm(
-  //     `Delete ${person.name}?`
-  //   )
+    const confirm = window.confirm(
+      `Delete ${person.name}?`
+    )
 
-  //   if (confirm) {
-  //     personService
-  //       .remove(id)
-  //       .then(returnedPerson => {
-  //         setPersons(persons.concat(returnedPerson))
-  //       })
-  //   }
+    if (confirm) {
+      personService
+        .remove(id)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+        })
+    }
 
-  // }
+  }
 
   return (
     <div>
@@ -119,7 +119,7 @@ const App = () => {
       <PersonForm addPerson={addPerson} newName={newName} newNumber={newNumber} handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} />
 
       <h2>Numbers</h2>
-      <Persons persons={persons} search={search}  />
+      <Persons persons={persons} search={search} handleDeleteClick={handleDeleteClick} />
     </div>
   )
 
