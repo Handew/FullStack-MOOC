@@ -2,6 +2,25 @@ import React, { useState, useEffect} from 'react'
 import axios from 'axios'
 
 const Data = ({ data, search }) => {
+  const clickHandler = () =>{
+    return(
+      <div>
+        {dataa.map(maa => 
+          <p key={maa.alpha3Code}>
+            <h1>{maa.name}</h1>
+            <p>capital {maa.capital}<br />
+            population {maa.population}</p> 
+            <h3>languages</h3>
+            <ul>{maa.languages.map(x => 
+              <li>{x.name}</li>
+            )}</ul>
+            <img src={maa.flag} alt="kuva" width="200"></img>
+          </p>
+        )}
+    </div>
+    )
+  }
+
   const dataa = 
     data.filter(maa =>
       maa.name.toLowerCase().includes(search.toLowerCase()))
@@ -36,7 +55,7 @@ const Data = ({ data, search }) => {
         <div>
           <ul>
             {dataa.map(maa =>
-              <li key={maa.alpha3Code}>{maa.name}</li>
+              <li key={maa.alpha3Code}>{maa.name} <button onClick={clickHandler}>show</button></li>
               )}
           </ul>
         </div>
