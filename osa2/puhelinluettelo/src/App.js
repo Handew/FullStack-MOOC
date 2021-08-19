@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 const Filter = ({ search, handleSearchInputChange }) => {
   return (
@@ -42,11 +43,15 @@ const Persons = ({ persons, search, handleDeleteClick }) => {
   )
 }
 
+
+
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [search, setSearch] = useState('')
+  const [infoMessage, setInfoMessage] = useState('')
+  const [tila, setTila] = useState('')
 
   useEffect(() => {
     personService
@@ -65,6 +70,11 @@ const App = () => {
     //Tarkistus onko nimi jo olemassa => jos on niin ilmoitus tästä eikä tätä lisätä uudelleen
     if (!(persons.find(p => p.name === newName))) {
       setPersons(persons.concat(personObject))
+      setInfoMessage(`Added ${newName}`)
+      setTimeout(() => {
+        setInfoMessage(null)
+      }, 5000)
+      setTila('add')
       setNewName('')
       setNewNumber('')
 
@@ -82,8 +92,13 @@ const App = () => {
         const pers = persons.find(p => p.name === newName)
 
         if (conf) {
+          setInfoMessage(`Edited ${newName}`)
+          setTimeout(() => {
+            setInfoMessage(null)
+          }, 5000)
           setNewName('')
           setNewNumber('')
+          setTila('edit')
 
           personService
             .update(pers.id, personObject)
@@ -124,12 +139,18 @@ const App = () => {
           }
         })
     }
+    setTila('error')
+    setInfoMessage(`Deleted ${person.name}`)
+    setTimeout(() => {
+      setInfoMessage(null)
+    }, 5000)
 
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={infoMessage} alert={tila} />
       <Filter search={search} handleSearchInputChange={handleSearchInputChange} />
 
       <h2>add a new</h2>
