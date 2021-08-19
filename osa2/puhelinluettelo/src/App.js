@@ -30,7 +30,7 @@ const Persons = ({ persons, search, handleDeleteClick }) => {
         let lowerCaseName = persons.name.toLowerCase()
         if (lowerCaseName.indexOf(search) > -1) {
           return (
-            <p key={persons.name}> {persons.name} {persons.number} <button onClick={handleDeleteClick}>delete</button></p>
+            <p key={persons.name}> {persons.name} {persons.number} <button onClick={() => handleDeleteClick(persons.id)}>delete</button></p>
           )
         }
         return (
@@ -93,7 +93,7 @@ const App = () => {
   }
 
   const handleDeleteClick = (id) => {
-    const person = persons.find((per) => per.id === id)
+    const person = persons.find(per => per.id === id)
     console.log("tää vittuilee",person)
     
     const confirm = window.confirm(
@@ -103,9 +103,14 @@ const App = () => {
     if (confirm) {
       personService
         .remove(id)
-        .then(returnedPerson => {
-          setPersons(persons.concat(returnedPerson))
+        .then((response) => {
+          if (response.status === 200) {
+            setPersons(persons.filter((filtered) => filtered.id !== id))
+          }
         })
+        // .then(returnedPerson => {
+        //   setPersons(persons.concat(returnedPerson))
+        
     }
 
   }

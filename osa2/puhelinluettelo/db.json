@@ -2,38 +2,8 @@
   "persons": [
     {
       "name": "Arto Hellas",
-      "number": "040-123456",
+      "number": "045 1545 8478",
       "id": 1
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": 2
-    },
-    {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
-      "id": 3
-    },
-    {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": 4
-    },
-    {
-      "name": "Hannu Ilvonen",
-      "number": "040 4589 115",
-      "id": 5
-    },
-    {
-      "name": "Ida Testaaja",
-      "number": "0450 4546",
-      "id": 6
-    },
-    {
-      "name": "Teppo Testaaja",
-      "number": "0444 5555 999",
-      "id": 7
     }
   ]
 }
