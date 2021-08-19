@@ -18,6 +18,10 @@ const remove = id => {
 
 const update = (id, newObject) => {
     return axios.put(`${baseUrl}/${id}`, newObject)
+    // .then(response => response.data)
+    // .catch(error => {
+    //     console.log('fail')
+    // })
 }
 
 export default { getAll, create, remove, update }

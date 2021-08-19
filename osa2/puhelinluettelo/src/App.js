@@ -86,8 +86,8 @@ const App = () => {
         setNewNumber('')
       })
 
-    } else {
-      const conf = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
+    } else { 
+        const conf = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
       
         const pers = persons.find(p => p.name === newName)
 
@@ -104,8 +104,18 @@ const App = () => {
             .update(pers.id, personObject)
             .then(response => {
               setPersons(persons.map(per => per.id !== pers.id ? per : response.data))
-            }    
-            )}
+            })
+            .catch(error => {
+              setInfoMessage(`Information of ${newName} has already been removed from server`)
+              setTimeout(() => {
+                setInfoMessage(null)
+              }, 5000)
+              setPersons(persons.filter(p => p.id !== pers.id))
+            })
+        }
+
+
+
     }
   }
 
@@ -124,7 +134,6 @@ const App = () => {
 
   const handleDeleteClick = (id) => {
     const person = persons.find(per => per.id === id)
-    console.log("tää vittuilee",person)
     
     const confirm = window.confirm(
       `Delete ${person.name}?`
