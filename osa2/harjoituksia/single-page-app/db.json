@@ -35,6 +35,18 @@
       "date": "2021-05-05T11:59:55.160Z",
       "important": false,
       "id": 6
+    },
+    {
+      "content": "",
+      "date": "2021-08-19T14:55:26.203Z",
+      "important": false,
+      "id": 7
+    },
+    {
+      "content": "Testiä",
+      "date": "2021-08-19T14:55:35.947Z",
+      "important": true,
+      "id": 8
     }
   ]
 }
