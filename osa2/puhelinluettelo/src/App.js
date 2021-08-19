@@ -67,18 +67,33 @@ const App = () => {
       setPersons(persons.concat(personObject))
       setNewName('')
       setNewNumber('')
-    } else {
-      window.alert(`${newName} is already added to phonebook`)
-    }
 
-    personService
+      personService
       .create(personObject)
       .then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewNumber('')
       })
+
+    } else {
+      const conf = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
+      
+        const pers = persons.find(p => p.name === newName)
+
+        if (conf) {
+          setNewName('')
+          setNewNumber('')
+
+          personService
+            .update(pers.id, personObject)
+            .then(response => {
+              setPersons(persons.map(per => per.id !== pers.id ? per : response.data))
+            }    
+            )}
+    }
   }
+
 
   const handleSearchInputChange = (event) => {
     setSearch(event.target.value.toLowerCase())
@@ -108,9 +123,6 @@ const App = () => {
             setPersons(persons.filter((filtered) => filtered.id !== id))
           }
         })
-        // .then(returnedPerson => {
-        //   setPersons(persons.concat(returnedPerson))
-        
     }
 
   }

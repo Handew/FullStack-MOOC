@@ -4,6 +4,21 @@
       "name": "Arto Hellas",
       "number": "045 1545 8478",
       "id": 1
+    },
+    {
+      "name": "Hannu Ilvonen",
+      "number": "45646",
+      "id": 2
+    },
+    {
+      "name": "Arska",
+      "number": "555",
+      "id": 3
+    },
+    {
+      "name": "Ida Torvinen",
+      "number": "050 798465",
+      "id": 4
     }
   ]
 }
