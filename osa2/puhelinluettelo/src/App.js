@@ -106,6 +106,7 @@ const App = () => {
               setPersons(persons.map(per => per.id !== pers.id ? per : response.data))
             })
             .catch(error => {
+              setTila('error')
               setInfoMessage(`Information of ${newName} has already been removed from server`)
               setTimeout(() => {
                 setInfoMessage(null)
