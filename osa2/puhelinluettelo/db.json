@@ -11,14 +11,14 @@
       "id": 2
     },
     {
-      "name": "Ida Torvinen",
-      "number": "050 798465",
-      "id": 4
-    },
-    {
       "name": "Jorma kattila",
       "number": "46546",
       "id": 6
+    },
+    {
+      "name": "Testi Käyttäjä",
+      "number": "123456",
+      "id": 7
     }
   ]
 }
